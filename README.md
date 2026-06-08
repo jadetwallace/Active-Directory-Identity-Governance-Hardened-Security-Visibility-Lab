@@ -51,27 +51,34 @@ Rather than relying on default configurations, the depth of this implementation 
 The core technical validity of this project is demonstrated by the systematic remediation of multi-layered enterprise protocol blockers encountered during deployment:
 
 ### 1. WinRM HTTPS Listener Pipeline & Cryptographic Binding
+
 * **The Problem:** Direct network drops (`TcpTestSucceeded : False`) and unencrypted transport flags on Port 5985 exposed log telemetry to potential credential sniffing.
 * **The Triage:** Taped and removed default HTTP listeners. Generated dedicated cryptographic self-signed certificates, captured the explicit thumbprint, and bound it directly to WinRM HTTPS Port 5986. Opened target network profiles using localized firewall constraints:
-  ```cmd
+
+   ```cmd
   netsh advfirewall firewall add rule name="WinRM HTTPS Port 5986" dir=in action=allow protocol=TCP localport=5986
 
 ### 2. Kerberos Clock-Skew Policy Failures (W32Time Engine)
+
 * **The Problem: Hypervisor state suspension caused severe time drift on the client workstation. This broke Kerberos authentication tokens, resulting in total Group Policy blockages (gpupdate /force errors) and pipeline drops.
 * **The Triage: Performed a hard reset of the localized time subsystem tracking database. Flushed and unregistered corrupted configuration keys before forcing cross-domain sync with the root Domain Controller:
 
-DOS
-```text
-net stop w32time
-w32tm /unregister
-w32tm /register
-net start w32time
-w32tm /resync /rediscover
-```
 
-WEC Access Control Layer Exceptions (Client-Side Event 102)
-#The Problem: The client engine successfully processed the subscription handshake (Event ID 100) but was blocked from reading or forwarding low-level security log channels, generating permission faults.
-#The Triage: Identified token evaluation limitations on the local machine transfer agent (NT AUTHORITY\NETWORK SERVICE). Remedied this access gap by injecting the system account directly into the local built-in Event Log Readers container, allowing the pipeline to stream events.
+   ```cmd
+   DOS
+   net stop w32time
+   w32tm /unregister
+   w32tm /register
+   net start w32time
+   w32tm /resync /rediscover
+
+
+###3. WEC Access Control Layer Exceptions (Client-Side Event 102)
+
+*The Problem: The client engine successfully processed the subscription handshake (Event ID 100) but was blocked from reading or forwarding low-level security log channels, generating permission faults.
+
+*The Triage: Identified token evaluation limitations on the local machine transfer agent (NT AUTHORITY\NETWORK SERVICE). Remedied this access gap by injecting the system account directly into the local built-in Event Log Readers container, allowing the pipeline to stream events.
+
 
 ⚡ Automated Identity Governance Engines (PowerShell Core)
 #To demonstrate production scalability, the manual management of objects within Active Directory Users and Computers (ADUC) was replaced with single-line parameter pipeline scripts.
@@ -79,25 +86,28 @@ WEC Access Control Layer Exceptions (Client-Side Event 102)
 🚀 1. The Programmatic Joiner Protocol (User Provisioning)Handles employee onboarding, forcing plain-text strings into secure tokens, applying standard organizational unit indexing, and mapping group-based authorization scopes:
 
 
+```text
 PowerShell
-# #### CONFIGURATION VARIABLES
+
+#---CONFIGURATION VARIABLES---
 $NewUser   = "JohnDoe"
 $UserGroup = "Event Log Readers"
 $Domain    = "iamlab.local"
 $Password  = ConvertTo-SecureString "CyberLab2026!" -AsPlainText -Force
 
-# #### 1. Provision Active Directory Security Principal Object
+#Provision Active Directory Security Principal Object
 New-ADUser -Name $NewUser -SamAccountName $NewUser -UserPrincipalName "$NewUser@$Domain" -AccountPassword $Password -ChangePasswordAtLogon $false -Enabled $true -Path "CN=Users,DC=iamlab,DC=local"
 
-### 2. Align Access Token to Targeted Security Boundary Group
+#Align Access Token to Targeted Security Boundary Group
 Add-ADGroupMember -Identity $UserGroup -Members $NewUser
-
+```
 
 🚨 2. The Programmatic Leaver Protocol (Offboarding & Isolation)Instantly revokes account authentication and token-signing capabilities, changing the active status flags and isolating the identity object to a dedicated containment Organizational Unit:
 
-
+```text
 PowerShell
-# #### --- CONFIGURATION VARIABLES ---
+
+#--- CONFIGURATION VARIABLES ---
 $TargetUser = "JohnDoe"
 $TargetOU   = "OU=Disabled_Users,DC=iamlab,DC=local"
 
@@ -106,7 +116,9 @@ Disable-ADAccount -Identity $TargetUser
 
 # #### 2. Structural Object Relocation to Containment Isolation OU
 Get-ADUser -Identity $TargetUser | Move-ADObject -TargetPath $TargetOU
+```
 
+---
 
 📊 Directory Architecture & Access Governance Schema
 🏢 Organizational Unit (OU) Tree
@@ -122,19 +134,13 @@ iamlab.local (Root Domain)
 👥 Role-Based Access Control (RBAC) Matrix
 Permissions are decoupled from individual users and mapped to security groups to ensure deterministic access management.
 
----
-
-### 👥 Role-Based Access Control (RBAC) Matrix
-Permissions are decoupled from individual users and mapped to security groups to ensure deterministic access management.
-
 | Functional Persona | Security Group | Default Access Mapping | Account Examples |
 | :--- | :--- | :--- | :--- |
 | **IT Administration** | `IT_Group` | Domain Engine Alterations / Full Escalation | `AdminUser`, `IT_User` |
 | **Human Resources** | `HR_Group` | Read/Write Access to Personnel Object Contexts | `HR_User` |
 | **Corporate Finance** | `Finance_Group` | Isolated Accounting Network Resource Shares | `Finance_User` |
 
-Functional PersonaSecurity GroupDefault Access MappingAccount ExamplesIT AdministrationIT_GroupDomain Engine Alterations / Full EscalationAdminUser, IT_UserHuman ResourcesHR_GroupRead/Write Access to Personnel Object ContextsHR_UserCorporate FinanceFinance_GroupIsolated Accounting Network Resource SharesFinance_User
-
+---
 
 🔍 Security Visibility & Monitored TelemetryWith advanced audit policies enforced via domain GPOs, the encrypted log pipeline captures SIEM-ready security audit data:
 
