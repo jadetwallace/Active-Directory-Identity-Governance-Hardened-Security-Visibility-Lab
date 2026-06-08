@@ -58,9 +58,9 @@ The core technical validity of this project is demonstrated by the systematic re
   ```cmd
   netsh advfirewall firewall add rule name="WinRM HTTPS Port 5986" dir=in action=allow protocol=TCP localport=5986
 
-2. Kerberos Clock-Skew Policy Failures (W32Time Engine)
-# The Problem: Hypervisor state suspension caused severe time drift on the client workstation. This broke Kerberos authentication tokens, resulting in total Group Policy blockages (gpupdate /force errors) and pipeline drops.
-# The Triage: Performed a hard reset of the localized time subsystem tracking database. Flushed and unregistered corrupted configuration keys before forcing cross-domain sync with the root Domain Controller:
+### 2. Kerberos Clock-Skew Policy Failures (W32Time Engine)
+* **The Problem: Hypervisor state suspension caused severe time drift on the client workstation. This broke Kerberos authentication tokens, resulting in total Group Policy blockages (gpupdate /force errors) and pipeline drops.
+* **The Triage: Performed a hard reset of the localized time subsystem tracking database. Flushed and unregistered corrupted configuration keys before forcing cross-domain sync with the root Domain Controller:
 
 DOS
 
