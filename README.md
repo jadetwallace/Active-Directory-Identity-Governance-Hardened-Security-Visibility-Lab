@@ -21,14 +21,16 @@ Rather than relying on default configurations, the depth of this implementation 
 
 ## 💻 Infrastructure & System Specifications
 
-                 [ iamlab.local Domain ]
+```text
+                     [ iamlab.local Domain ]
+                     
 +-----------------------+           +-----------------------+
-|   WIN-A19BKD6L34B     |           |     WIN10-CLIENT      |
+|    WIN-A19BKD6L34B    |           |     WIN10-CLIENT      |
 |  Windows Server 2022  | <=======  |    Windows 10 Pro     |
 |   Domain Controller   |  WinRM    |  Workstation Endpoint |
 |  (WEC / AD DS / DNS)  |  HTTPS    |  (Telemetry Source)   |
 +-----------------------+  (5986)   +-----------------------+
-
+```
 
 ### 🎛️ Domain Controller (`WIN-A19BKD6L34B`)
 * **Operating System:** Windows Server 2022 Standard
@@ -130,7 +132,7 @@ Functional PersonaSecurity GroupDefault Access MappingAccount ExamplesIT Adminis
 
 🔬 Verified Indicators of Compromise (IoCs) Tracked
 I. Brute-Force / Unauthorized Access Auditing (Event ID 4625)
-# Captures failed authentication metadata, providing defense analysts with explicit target attribution (MaliciousActor) and source origin tracking (WIN10-CLIENT):
+Captures failed authentication metadata, providing defense analysts with explicit target attribution (MaliciousActor) and source origin tracking (WIN10-CLIENT):
 
 Plaintext
 
@@ -144,7 +146,7 @@ Logon Type:    2 (Interactive)
 Status:        0xC000006A (Incorrect Password Entered)
 
 II. Automated Security Policy Account Lockouts (Event ID 4740)
-# Fires automatically when password failure thresholds are breached, locking out the user and recording the exact workstation that generated the lockout sequence:
+Fires automatically when password failure thresholds are breached, locking out the user and recording the exact workstation that generated the lockout sequence:
 
 Plaintext
 
@@ -156,12 +158,12 @@ Target Account: IAMLAB\JohnDoe
 Caller Computer Name: WIN10-CLIENT
 
 III. Privileged Group Membership Mutations (Event ID 4728 / 4729)
-# Monitors privilege escalation vectors by logging whenever an account is added to or removed from highly sensitive infrastructure groups like Domain Admins.
+Monitors privilege escalation vectors by logging whenever an account is added to or removed from highly sensitive infrastructure groups like Domain Admins.
 
 🧰 Technical Competencies Demonstrated
-# Directory Infrastructure Engine Architecture: Active Directory Domain Services (AD DS) & Integrated DNS Management.
-# Identity Governance & Administration (IGA): Programmatic JML Lifecycle Engineering & Provisioning.
-# Defensive Engineering Pipelines: Windows Event Forwarding (WEF) & Centralized Windows Event Collection (WEC).
-# Secure Remote Transport Engineering: WinRM Architecture Hardening, Port 5986 Configuration, & TLS/SSL Certificate Management.
-# Scripted System Automation: Advanced PowerShell Scripting & Core Parameter Optimization.
-# Access Control Framework Design: Role-Based Access Control (RBAC) Schema & Principle of Least Privilege (PoLP) Enforcement.
+Directory Infrastructure Engine Architecture: Active Directory Domain Services (AD DS) & Integrated DNS Management.
+Identity Governance & Administration (IGA): Programmatic JML Lifecycle Engineering & Provisioning.
+Defensive Engineering Pipelines: Windows Event Forwarding (WEF) & Centralized Windows Event Collection (WEC).
+Secure Remote Transport Engineering: WinRM Architecture Hardening, Port 5986 Configuration, & TLS/SSL Certificate Management.
+Scripted System Automation: Advanced PowerShell Scripting & Core Parameter Optimization.
+Access Control Framework Design: Role-Based Access Control (RBAC) Schema & Principle of Least Privilege (PoLP) Enforcement.
