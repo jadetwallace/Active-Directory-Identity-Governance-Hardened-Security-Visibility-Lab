@@ -204,6 +204,7 @@ Users_Server - *Structural overview inside Active Directory Users and Computers 
 Admin_Properties_Server - *Security mapping and structural properties for specialized infrastructure operations.*
 
 Part 2: Programmatic Lifecycle Automation (PowerShell Core Modules)
+PowerShellISE1 - *The core Joiner parameter matrix executed within PowerShell for scalable provisioning.*
 PowerShellISE2 - *Console telemetry tracking automated account creation and structural group enrollment.*
 
 Part 3: Identity Governance & Access Management Verification
@@ -213,15 +214,21 @@ Account_Disabled - *Verification UI showcasing a targeted security principal ins
 DisabledUser1 - *Visual proof of automated object transfer to the offboarded/isolated containment Organizational Unit.*
 
 This index contains visual confirmation of successful configuration, policy enforcement, script execution, and cryptographic log transport pipelines across the lab environment.
-
-<img width="963" height="720" alt="HRAccess_noFinance" src="https://github.com/user-attachments/assets/4b565ace-34da-4ce4-ba64-aaf5247272ca" />
-<img width="873" height="649" alt="Admin Properties_Server" src="https://github.com/user-attachments/assets/7003720e-4526-4f28-af2c-740c45e6119b" />
-<img width="869" height="640" alt="Users_Server" src="https://github.com/user-attachments/assets/dcf828d6-e795-4b8b-9a95-507d480767b0" />
-<img width="778" height="569" alt="IAM_Access1" src="https://github.com/user-attachments/assets/8fea8415-89a9-413e-be30-5b6952ffbe1f" />
-<img width="1062" height="784" alt="Account_Disabled" src="https://github.com/user-attachments/assets/e7f29183-1549-4626-8271-852f580bb5d4" />
-<img width="955" height="399" alt="WinRm" src="https://github.com/user-attachments/assets/cfe89573-c0ee-4c49-8911-5572d9adb117" />
+Part 1
 <img width="1064" height="749" alt="CA" src="https://github.com/user-attachments/assets/969c75b8-18c9-42ea-94b5-a7c4bd88658c" />
+<img width="955" height="399" alt="WinRm" src="https://github.com/user-attachments/assets/cfe89573-c0ee-4c49-8911-5572d9adb117" />
+<img width="869" height="640" alt="Users_Server" src="https://github.com/user-attachments/assets/dcf828d6-e795-4b8b-9a95-507d480767b0" />
+<img width="873" height="649" alt="Admin Properties_Server" src="https://github.com/user-attachments/assets/7003720e-4526-4f28-af2c-740c45e6119b" />
+
+---
+Part 2
 <img width="1084" height="839" alt="PowerShellISE1" src="https://github.com/user-attachments/assets/c4bda363-d6e5-4cc6-99da-585682e3967b" />
 <img width="1090" height="819" alt="PowerShellISE2" src="https://github.com/user-attachments/assets/f22d3e88-065e-4b84-a22f-828d7a463191" />
+
+---
+Part 3
+<img width="778" height="569" alt="IAM_Access1" src="https://github.com/user-attachments/assets/8fea8415-89a9-413e-be30-5b6952ffbe1f" />
+<img width="963" height="720" alt="HRAccess_noFinance" src="https://github.com/user-attachments/assets/4b565ace-34da-4ce4-ba64-aaf5247272ca" />
+<img width="1062" height="784" alt="Account_Disabled" src="https://github.com/user-attachments/assets/f5f35825-d5a0-4c10-ad4a-c77cb1b8b2b0" />
 <img width="1121" height="727" alt="DisabledUser1" src="https://github.com/user-attachments/assets/9978f7d6-7dff-4f5f-b6e7-839edd54ad2d" />
 
