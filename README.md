@@ -1,7 +1,7 @@
 # Active-Directory-Identity-Governance-Hardened-Security-Visibility-Lab
 
 
-Markdown# Enterprise Identity & Access Management (IAM) Identity Governance Lab
+# Enterprise Identity & Access Management (IAM) Identity Governance Lab
 
 ## 📌 Project Architecture Overview
 This production-grade Identity & Access Management (IAM) and Identity Governance (IGA) laboratory simulates an enterprise workforce environment. Built using **Windows Server 2022** and **Windows 10 Pro** hypervised within a localized virtualization stack, this lab acts as a proving ground for centralizing directory services, hardening access control, and automating identity lifecycles.
@@ -80,29 +80,29 @@ w32tm /resync /rediscover
 🚀 1. The Programmatic Joiner Protocol (User Provisioning)Handles employee onboarding, forcing plain-text strings into secure tokens, applying standard organizational unit indexing, and mapping group-based authorization scopes:
 
 PowerShell
-# --- CONFIGURATION VARIABLES ---
+### --- CONFIGURATION VARIABLES ---
 $NewUser   = "JohnDoe"
 $UserGroup = "Event Log Readers"
 $Domain    = "iamlab.local"
 $Password  = ConvertTo-SecureString "CyberLab2026!" -AsPlainText -Force
 
-# 1. Provision Active Directory Security Principal Object
+### 1. Provision Active Directory Security Principal Object
 New-ADUser -Name $NewUser -SamAccountName $NewUser -UserPrincipalName "$NewUser@$Domain" -AccountPassword $Password -ChangePasswordAtLogon $false -Enabled $true -Path "CN=Users,DC=iamlab,DC=local"
 
-# 2. Align Access Token to Targeted Security Boundary Group
+### 2. Align Access Token to Targeted Security Boundary Group
 Add-ADGroupMember -Identity $UserGroup -Members $NewUser
 
 🚨 2. The Programmatic Leaver Protocol (Offboarding & Isolation)Instantly revokes account authentication and token-signing capabilities, changing the active status flags and isolating the identity object to a dedicated containment Organizational Unit:
 
 PowerShell
-# --- CONFIGURATION VARIABLES ---
+### --- CONFIGURATION VARIABLES ---
 $TargetUser = "JohnDoe"
 $TargetOU   = "OU=Disabled_Users,DC=iamlab,DC=local"
 
-# 1. Immediate Account Status Token Revocation
+### 1. Immediate Account Status Token Revocation
 Disable-ADAccount -Identity $TargetUser
 
-# 2. Structural Object Relocation to Containment Isolation OU
+### 2. Structural Object Relocation to Containment Isolation OU
 Get-ADUser -Identity $TargetUser | Move-ADObject -TargetPath $TargetOU
 
 📊 Directory Architecture & Access Governance Schema
@@ -161,9 +161,9 @@ III. Privileged Group Membership Mutations (Event ID 4728 / 4729)
 Monitors privilege escalation vectors by logging whenever an account is added to or removed from highly sensitive infrastructure groups like Domain Admins.
 
 🧰 Technical Competencies Demonstrated
-Directory Infrastructure Engine Architecture: Active Directory Domain Services (AD DS) & Integrated DNS Management.
-Identity Governance & Administration (IGA): Programmatic JML Lifecycle Engineering & Provisioning.
-Defensive Engineering Pipelines: Windows Event Forwarding (WEF) & Centralized Windows Event Collection (WEC).
-Secure Remote Transport Engineering: WinRM Architecture Hardening, Port 5986 Configuration, & TLS/SSL Certificate Management.
-Scripted System Automation: Advanced PowerShell Scripting & Core Parameter Optimization.
-Access Control Framework Design: Role-Based Access Control (RBAC) Schema & Principle of Least Privilege (PoLP) Enforcement.
+*Directory Infrastructure Engine Architecture: Active Directory Domain Services (AD DS) & Integrated DNS Management.
+*Identity Governance & Administration (IGA): Programmatic JML Lifecycle Engineering & Provisioning.
+*Defensive Engineering Pipelines: Windows Event Forwarding (WEF) & Centralized Windows Event Collection (WEC).
+*Secure Remote Transport Engineering: WinRM Architecture Hardening, Port 5986 Configuration, & TLS/SSL Certificate Management.
+*Scripted System Automation: Advanced PowerShell Scripting & Core Parameter Optimization.
+*Access Control Framework Design: Role-Based Access Control (RBAC) Schema & Principle of Least Privilege (PoLP) Enforcement.
