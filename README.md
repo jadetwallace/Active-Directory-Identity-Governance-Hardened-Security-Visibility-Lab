@@ -190,3 +190,28 @@ Monitors privilege escalation vectors by logging whenever an account is added to
 * Secure Remote Transport Engineering: WinRM Architecture Hardening, Port 5986 Configuration, & TLS/SSL Certificate Management.
 * Scripted System Automation: Advanced PowerShell Scripting & Core Parameter Optimization.
 * Access Control Framework Design: Role-Based Access Control (RBAC) Schema & Principle of Least Privilege (PoLP) Enforcement.
+
+---
+
+
+---
+
+## 📸 Lab Evidence & Verification Gallery
+
+This index contains visual confirmation of successful configuration, policy enforcement, script execution, and cryptographic log transport pipelines across the lab environment.
+
+### 🔐 Part 1: Cryptographic Infrastructure & Active Directory Hardening
+* **[Fig 1.1: Enterprise Certificate Authority Verification Workspace](images/CA.png)** *Visual confirmation of active internal TLS/SSL certificates used to secure WinRM communications.*
+* **[Fig 1.2: Hardened WinRM HTTPS Listener Setup (Port 5986)](images/WinRm.png)** *Command-line validation showing active cryptographic listeners explicitly bound to secure port bindings.*
+* **[Fig 1.3: Centralized Directory Service Schema - Active Users Inventory](images/Users_Server.png)** *Structural overview inside Active Directory Users and Computers (ADUC) showing active test identities.*
+* **[Fig 1.4: Domain Engineering Administrative Group Profile Settings](images/Admin%20Properties_Server.png)** *Security mapping and structural properties for specialized infrastructure operations.*
+
+### ⚡ Part 2: Programmatic Lifecycle Automation (PowerShell Core Modules)
+* **[Fig 2.1: Automated Employee Onboarding Script Architecture](images/PowerShellISE1.png)** *The core Joiner parameter matrix executed within PowerShell for scalable provisioning.*
+* **[Fig 2.2: User Provisioning Pipeline and Authorization Scope Mapping](images/PowerShellISE2.png)** *Console telemetry tracking automated account creation and structural group enrollment.*
+
+### 🛡️ Part 3: Identity Governance & Access Management Verification
+* **[Fig 3.1: Granular IAM Access Matrix & Authorization Rules Test](images/IAM_Access1.png)** *Validation testing mapping explicit group boundaries across files and system assets.*
+* **[Fig 3.2: Deterministic RBAC Enforcement - Human Resources Isolation Test](images/HRAccess_noFinance.jpg)** *Live validation proving an HR identity is restricted from modifying or accessing Finance partitions.*
+* **[Fig 3.3: Active Account Deactivation Verification Interface](images/Account_Disabled.png)** *Verification UI showcasing a targeted security principal instantly flagged as inactive.*
+* **[Fig 3.4: Programmatic Leaver Isolation - Confirmed Containment OU Shift](images/DisabledUser1.png)** *Visual proof of automated object transfer to the offboarded/isolated containment Organizational Unit.*
