@@ -60,8 +60,8 @@ The core technical validity of this project is demonstrated by the systematic re
 
 ### 2. Kerberos Clock-Skew Policy Failures (W32Time Engine)
 
-* **The Problem: Hypervisor state suspension caused severe time drift on the client workstation. This broke Kerberos authentication tokens, resulting in total Group Policy blockages (gpupdate /force errors) and pipeline drops.
-* **The Triage: Performed a hard reset of the localized time subsystem tracking database. Flushed and unregistered corrupted configuration keys before forcing cross-domain sync with the root Domain Controller:
+* **The Problem:*** Hypervisor state suspension caused severe time drift on the client workstation. This broke Kerberos authentication tokens, resulting in total Group Policy blockages (gpupdate /force errors) and pipeline drops.
+* **The Triage:*** Performed a hard reset of the localized time subsystem tracking database. Flushed and unregistered corrupted configuration keys before forcing cross-domain sync with the root Domain Controller:
 
 
    ```cmd
@@ -73,12 +73,13 @@ The core technical validity of this project is demonstrated by the systematic re
    w32tm /resync /rediscover
 
 
-###3. WEC Access Control Layer Exceptions (Client-Side Event 102)
+### 3. WEC Access Control Layer Exceptions (Client-Side Event 102)
 
-*The Problem: The client engine successfully processed the subscription handshake (Event ID 100) but was blocked from reading or forwarding low-level security log channels, generating permission faults.
+* **The Problem:** The client engine successfully processed the subscription handshake (Event ID 100) but was blocked from reading or forwarding low-level security log channels, generating permission faults.
 
-*The Triage: Identified token evaluation limitations on the local machine transfer agent (NT AUTHORITY\NETWORK SERVICE). Remedied this access gap by injecting the system account directly into the local built-in Event Log Readers container, allowing the pipeline to stream events.
+* **The Triage:** Identified token evaluation limitations on the local machine transfer agent (NT AUTHORITY\NETWORK SERVICE). Remedied this access gap by injecting the system account directly into the local built-in Event Log Readers container, allowing the pipeline to stream events.
 
+---
 
 ⚡ Automated Identity Governance Engines (PowerShell Core)
 #To demonstrate production scalability, the manual management of objects within Active Directory Users and Computers (ADUC) was replaced with single-line parameter pipeline scripts.
