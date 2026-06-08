@@ -197,17 +197,17 @@ Monitors privilege escalation vectors by logging whenever an account is added to
 ---
 
 ## 📸 Lab Evidence & Verification Gallery
-Part 1: Cryptographic Infrastructure & Active Directory Hardening
+*Part 1: Cryptographic Infrastructure & Active Directory Hardening
 CA - *Visual confirmation of active internal TLS/SSL certificates used to secure WinRM communications.*
 WinRM - *Command-line validation showing active cryptographic listeners explicitly bound to secure port bindings.*
 Users_Server - *Structural overview inside Active Directory Users and Computers (ADUC) showing active test identities.*
 Admin_Properties_Server - *Security mapping and structural properties for specialized infrastructure operations.*
 
-Part 2: Programmatic Lifecycle Automation (PowerShell Core Modules)
+*Part 2: Programmatic Lifecycle Automation (PowerShell Core Modules)
 PowerShellISE1 - *The core Joiner parameter matrix executed within PowerShell for scalable provisioning.*
 PowerShellISE2 - *Console telemetry tracking automated account creation and structural group enrollment.*
 
-Part 3: Identity Governance & Access Management Verification
+*Part 3: Identity Governance & Access Management Verification
 IAM_Access1 - *Validation testing mapping explicit group boundaries across files and system assets.*
 HRAccess_noFinance - *Live validation proving an HR identity is restricted from modifying or accessing Finance partitions.*
 Account_Disabled - *Verification UI showcasing a targeted security principal instantly flagged as inactive.*
