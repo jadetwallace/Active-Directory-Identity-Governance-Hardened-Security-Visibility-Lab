@@ -214,6 +214,9 @@ Account_Disabled - *Verification UI showcasing a targeted security principal ins
 DisabledUser1 - *Visual proof of automated object transfer to the offboarded/isolated containment Organizational Unit.*
 
 This index contains visual confirmation of successful configuration, policy enforcement, script execution, and cryptographic log transport pipelines across the lab environment.
+
+---
+
 Part 1
 <img width="1064" height="749" alt="CA" src="https://github.com/user-attachments/assets/969c75b8-18c9-42ea-94b5-a7c4bd88658c" />
 <img width="955" height="399" alt="WinRm" src="https://github.com/user-attachments/assets/cfe89573-c0ee-4c49-8911-5572d9adb117" />
@@ -222,11 +225,13 @@ Part 1
 
 ---
 Part 2
+
 <img width="1084" height="839" alt="PowerShellISE1" src="https://github.com/user-attachments/assets/c4bda363-d6e5-4cc6-99da-585682e3967b" />
 <img width="1090" height="819" alt="PowerShellISE2" src="https://github.com/user-attachments/assets/f22d3e88-065e-4b84-a22f-828d7a463191" />
 
 ---
 Part 3
+
 <img width="778" height="569" alt="IAM_Access1" src="https://github.com/user-attachments/assets/8fea8415-89a9-413e-be30-5b6952ffbe1f" />
 <img width="963" height="720" alt="HRAccess_noFinance" src="https://github.com/user-attachments/assets/4b565ace-34da-4ce4-ba64-aaf5247272ca" />
 <img width="1062" height="784" alt="Account_Disabled" src="https://github.com/user-attachments/assets/f5f35825-d5a0-4c10-ad4a-c77cb1b8b2b0" />
