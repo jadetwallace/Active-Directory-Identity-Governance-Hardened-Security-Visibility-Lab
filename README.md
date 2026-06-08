@@ -79,6 +79,7 @@ w32tm /resync /rediscover
 
 🚀 1. The Programmatic Joiner Protocol (User Provisioning)Handles employee onboarding, forcing plain-text strings into secure tokens, applying standard organizational unit indexing, and mapping group-based authorization scopes:
 
+
 PowerShell
 ### --- CONFIGURATION VARIABLES ---
 $NewUser   = "JohnDoe"
@@ -92,7 +93,9 @@ New-ADUser -Name $NewUser -SamAccountName $NewUser -UserPrincipalName "$NewUser@
 ### 2. Align Access Token to Targeted Security Boundary Group
 Add-ADGroupMember -Identity $UserGroup -Members $NewUser
 
+
 🚨 2. The Programmatic Leaver Protocol (Offboarding & Isolation)Instantly revokes account authentication and token-signing capabilities, changing the active status flags and isolating the identity object to a dedicated containment Organizational Unit:
+
 
 PowerShell
 ### --- CONFIGURATION VARIABLES ---
@@ -105,6 +108,7 @@ Disable-ADAccount -Identity $TargetUser
 ### 2. Structural Object Relocation to Containment Isolation OU
 Get-ADUser -Identity $TargetUser | Move-ADObject -TargetPath $TargetOU
 
+
 📊 Directory Architecture & Access Governance Schema
 🏢 Organizational Unit (OU) Tree
 
@@ -113,6 +117,7 @@ iamlab.local (Root Domain)
 ├── 📂 Users           (Standard Workforce Personas)
 ├── 📂 Disabled_Users  (Containment & Offboarding Isolation Zone)
 └── 📂 Workstations    (Machine Objects)
+
 
 👥 Role-Based Access Control (RBAC) Matrix
 Permissions are decoupled from individual users and mapped to security groups to ensure deterministic access management.
@@ -128,11 +133,14 @@ Permissions are decoupled from individual users and mapped to security groups to
 
 Functional PersonaSecurity GroupDefault Access MappingAccount ExamplesIT AdministrationIT_GroupDomain Engine Alterations / Full EscalationAdminUser, IT_UserHuman ResourcesHR_GroupRead/Write Access to Personnel Object ContextsHR_UserCorporate FinanceFinance_GroupIsolated Accounting Network Resource SharesFinance_User
 
+
 🔍 Security Visibility & Monitored TelemetryWith advanced audit policies enforced via domain GPOs, the encrypted log pipeline captures SIEM-ready security audit data:
+
 
 🔬 Verified Indicators of Compromise (IoCs) Tracked
 I. Brute-Force / Unauthorized Access Auditing (Event ID 4625)
 Captures failed authentication metadata, providing defense analysts with explicit target attribution (MaliciousActor) and source origin tracking (WIN10-CLIENT):
+
 
 Plaintext
 
@@ -144,6 +152,7 @@ Description:   An account failed to log on.
 Account Name:  MaliciousActor
 Logon Type:    2 (Interactive)
 Status:        0xC000006A (Incorrect Password Entered)
+
 
 II. Automated Security Policy Account Lockouts (Event ID 4740)
 Fires automatically when password failure thresholds are breached, locking out the user and recording the exact workstation that generated the lockout sequence:
@@ -157,13 +166,14 @@ Description:   A user account was locked out.
 Target Account: IAMLAB\JohnDoe
 Caller Computer Name: WIN10-CLIENT
 
+
 III. Privileged Group Membership Mutations (Event ID 4728 / 4729)
 Monitors privilege escalation vectors by logging whenever an account is added to or removed from highly sensitive infrastructure groups like Domain Admins.
 
 🧰 Technical Competencies Demonstrated
-*Directory Infrastructure Engine Architecture: Active Directory Domain Services (AD DS) & Integrated DNS Management.
-*Identity Governance & Administration (IGA): Programmatic JML Lifecycle Engineering & Provisioning.
-*Defensive Engineering Pipelines: Windows Event Forwarding (WEF) & Centralized Windows Event Collection (WEC).
-*Secure Remote Transport Engineering: WinRM Architecture Hardening, Port 5986 Configuration, & TLS/SSL Certificate Management.
-*Scripted System Automation: Advanced PowerShell Scripting & Core Parameter Optimization.
-*Access Control Framework Design: Role-Based Access Control (RBAC) Schema & Principle of Least Privilege (PoLP) Enforcement.
+* Directory Infrastructure Engine Architecture: Active Directory Domain Services (AD DS) & Integrated DNS Management.
+* Identity Governance & Administration (IGA): Programmatic JML Lifecycle Engineering & Provisioning.
+* Defensive Engineering Pipelines: Windows Event Forwarding (WEF) & Centralized Windows Event Collection (WEC).
+* Secure Remote Transport Engineering: WinRM Architecture Hardening, Port 5986 Configuration, & TLS/SSL Certificate Management.
+* Scripted System Automation: Advanced PowerShell Scripting & Core Parameter Optimization.
+* Access Control Framework Design: Role-Based Access Control (RBAC) Schema & Principle of Least Privilege (PoLP) Enforcement.
