@@ -81,8 +81,8 @@ The core technical validity of this project is demonstrated by the systematic re
 
 ---
 
-⚡ Automated Identity Governance Engines (PowerShell Core)
-#To demonstrate production scalability, the manual management of objects within Active Directory Users and Computers (ADUC) was replaced with single-line parameter pipeline scripts.
+### ⚡ Automated Identity Governance Engines (PowerShell Core)
+* To demonstrate production scalability, the manual management of objects within Active Directory Users and Computers (ADUC) was replaced with single-line parameter pipeline scripts.
 
 🚀 1. The Programmatic Joiner Protocol (User Provisioning)Handles employee onboarding, forcing plain-text strings into secure tokens, applying standard organizational unit indexing, and mapping group-based authorization scopes:
 
