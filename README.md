@@ -1,8 +1,6 @@
 # Active-Directory-Identity-Governance-Hardened-Security-Visibility-Lab
 
 
-# Enterprise Identity & Access Management (IAM) Identity Governance Lab
-
 ## 📌 Project Architecture Overview
 This production-grade Identity & Access Management (IAM) and Identity Governance (IGA) laboratory simulates an enterprise workforce environment. Built using **Windows Server 2022** and **Windows 10 Pro** hypervised within a localized virtualization stack, this lab acts as a proving ground for centralizing directory services, hardening access control, and automating identity lifecycles.
 
@@ -63,14 +61,15 @@ The core technical validity of this project is demonstrated by the systematic re
 * **The Triage: Performed a hard reset of the localized time subsystem tracking database. Flushed and unregistered corrupted configuration keys before forcing cross-domain sync with the root Domain Controller:
 
 DOS
-
+```text
 net stop w32time
 w32tm /unregister
 w32tm /register
 net start w32time
 w32tm /resync /rediscover
+```
 
-4. WEC Access Control Layer Exceptions (Client-Side Event 102)
+WEC Access Control Layer Exceptions (Client-Side Event 102)
 #The Problem: The client engine successfully processed the subscription handshake (Event ID 100) but was blocked from reading or forwarding low-level security log channels, generating permission faults.
 #The Triage: Identified token evaluation limitations on the local machine transfer agent (NT AUTHORITY\NETWORK SERVICE). Remedied this access gap by injecting the system account directly into the local built-in Event Log Readers container, allowing the pipeline to stream events.
 
@@ -81,13 +80,13 @@ w32tm /resync /rediscover
 
 
 PowerShell
-### --- CONFIGURATION VARIABLES ---
+# #### CONFIGURATION VARIABLES
 $NewUser   = "JohnDoe"
 $UserGroup = "Event Log Readers"
 $Domain    = "iamlab.local"
 $Password  = ConvertTo-SecureString "CyberLab2026!" -AsPlainText -Force
 
-### 1. Provision Active Directory Security Principal Object
+# #### 1. Provision Active Directory Security Principal Object
 New-ADUser -Name $NewUser -SamAccountName $NewUser -UserPrincipalName "$NewUser@$Domain" -AccountPassword $Password -ChangePasswordAtLogon $false -Enabled $true -Path "CN=Users,DC=iamlab,DC=local"
 
 ### 2. Align Access Token to Targeted Security Boundary Group
@@ -98,29 +97,32 @@ Add-ADGroupMember -Identity $UserGroup -Members $NewUser
 
 
 PowerShell
-### --- CONFIGURATION VARIABLES ---
+# #### --- CONFIGURATION VARIABLES ---
 $TargetUser = "JohnDoe"
 $TargetOU   = "OU=Disabled_Users,DC=iamlab,DC=local"
 
-### 1. Immediate Account Status Token Revocation
+# #### 1. Immediate Account Status Token Revocation
 Disable-ADAccount -Identity $TargetUser
 
-### 2. Structural Object Relocation to Containment Isolation OU
+# #### 2. Structural Object Relocation to Containment Isolation OU
 Get-ADUser -Identity $TargetUser | Move-ADObject -TargetPath $TargetOU
 
 
 📊 Directory Architecture & Access Governance Schema
 🏢 Organizational Unit (OU) Tree
 
+```text
 iamlab.local (Root Domain)
 ├── 📂 Admins          (Privileged Engineering Identities)
 ├── 📂 Users           (Standard Workforce Personas)
 ├── 📂 Disabled_Users  (Containment & Offboarding Isolation Zone)
 └── 📂 Workstations    (Machine Objects)
-
+```
 
 👥 Role-Based Access Control (RBAC) Matrix
 Permissions are decoupled from individual users and mapped to security groups to ensure deterministic access management.
+
+---
 
 ### 👥 Role-Based Access Control (RBAC) Matrix
 Permissions are decoupled from individual users and mapped to security groups to ensure deterministic access management.
@@ -158,18 +160,19 @@ II. Automated Security Policy Account Lockouts (Event ID 4740)
 Fires automatically when password failure thresholds are breached, locking out the user and recording the exact workstation that generated the lockout sequence:
 
 Plaintext
-
+```text
 Log Name:      Security
 Event ID:      4740
 Keywords:      Audit Success
 Description:   A user account was locked out.
 Target Account: IAMLAB\JohnDoe
 Caller Computer Name: WIN10-CLIENT
-
+```
 
 III. Privileged Group Membership Mutations (Event ID 4728 / 4729)
 Monitors privilege escalation vectors by logging whenever an account is added to or removed from highly sensitive infrastructure groups like Domain Admins.
 
+---
 🧰 Technical Competencies Demonstrated
 * Directory Infrastructure Engine Architecture: Active Directory Domain Services (AD DS) & Integrated DNS Management.
 * Identity Governance & Administration (IGA): Programmatic JML Lifecycle Engineering & Provisioning.
