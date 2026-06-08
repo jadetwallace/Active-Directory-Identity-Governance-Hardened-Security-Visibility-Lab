@@ -86,42 +86,41 @@ The core technical validity of this project is demonstrated by the systematic re
 🚀 1. The Programmatic Joiner Protocol (User Provisioning)Handles employee onboarding, forcing plain-text strings into secure tokens, applying standard organizational unit indexing, and mapping group-based authorization scopes:
 
 
-```text
 PowerShell
+   ```cmd
+    #---CONFIGURATION VARIABLES---
+    $NewUser   = "JohnDoe"
+    $UserGroup = "Event Log Readers"
+    $Domain    = "iamlab.local"
+    $Password  = ConvertTo-SecureString "CyberLab2026!" -AsPlainText -Force
 
-#---CONFIGURATION VARIABLES---
-$NewUser   = "JohnDoe"
-$UserGroup = "Event Log Readers"
-$Domain    = "iamlab.local"
-$Password  = ConvertTo-SecureString "CyberLab2026!" -AsPlainText -Force
+    #Provision Active Directory Security Principal Object
+    New-ADUser -Name $NewUser -SamAccountName $NewUser -UserPrincipalName "$NewUser@$Domain" -AccountPassword $Password -      ChangePasswordAtLogon $false -Enabled $true -Path "CN=Users,DC=iamlab,DC=local"
 
-#Provision Active Directory Security Principal Object
-New-ADUser -Name $NewUser -SamAccountName $NewUser -UserPrincipalName "$NewUser@$Domain" -AccountPassword $Password -ChangePasswordAtLogon $false -Enabled $true -Path "CN=Users,DC=iamlab,DC=local"
-
-#Align Access Token to Targeted Security Boundary Group
-Add-ADGroupMember -Identity $UserGroup -Members $NewUser
-```
+    #Align Access Token to Targeted Security Boundary Group
+    Add-ADGroupMember -Identity $UserGroup -Members $NewUser
+   ```
 
 🚨 2. The Programmatic Leaver Protocol (Offboarding & Isolation)Instantly revokes account authentication and token-signing capabilities, changing the active status flags and isolating the identity object to a dedicated containment Organizational Unit:
 
-```text
+
 PowerShell
+   ```cmd
+    #--- CONFIGURATION VARIABLES ---
+    $TargetUser = "JohnDoe"
+    $TargetOU   = "OU=Disabled_Users,DC=iamlab,DC=local"
 
-#--- CONFIGURATION VARIABLES ---
-$TargetUser = "JohnDoe"
-$TargetOU   = "OU=Disabled_Users,DC=iamlab,DC=local"
+    #1. Immediate Account Status Token Revocation
+    Disable-ADAccount -Identity $TargetUser
 
-# #### 1. Immediate Account Status Token Revocation
-Disable-ADAccount -Identity $TargetUser
-
-# #### 2. Structural Object Relocation to Containment Isolation OU
-Get-ADUser -Identity $TargetUser | Move-ADObject -TargetPath $TargetOU
-```
+    #2. Structural Object Relocation to Containment Isolation OU
+    Get-ADUser -Identity $TargetUser | Move-ADObject -TargetPath $TargetOU
+   ```
 
 ---
 
 📊 Directory Architecture & Access Governance Schema
-🏢 Organizational Unit (OU) Tree
+*🏢 Organizational Unit (OU) Tree
 
 ```text
 iamlab.local (Root Domain)
@@ -130,6 +129,8 @@ iamlab.local (Root Domain)
 ├── 📂 Disabled_Users  (Containment & Offboarding Isolation Zone)
 └── 📂 Workstations    (Machine Objects)
 ```
+
+---
 
 👥 Role-Based Access Control (RBAC) Matrix
 Permissions are decoupled from individual users and mapped to security groups to ensure deterministic access management.
@@ -140,6 +141,7 @@ Permissions are decoupled from individual users and mapped to security groups to
 | **Human Resources** | `HR_Group` | Read/Write Access to Personnel Object Contexts | `HR_User` |
 | **Corporate Finance** | `Finance_Group` | Isolated Accounting Network Resource Shares | `Finance_User` |
 
+
 ---
 
 🔍 Security Visibility & Monitored TelemetryWith advanced audit policies enforced via domain GPOs, the encrypted log pipeline captures SIEM-ready security audit data:
@@ -149,7 +151,7 @@ Permissions are decoupled from individual users and mapped to security groups to
 I. Brute-Force / Unauthorized Access Auditing (Event ID 4625)
 Captures failed authentication metadata, providing defense analysts with explicit target attribution (MaliciousActor) and source origin tracking (WIN10-CLIENT):
 
-
+```text
 Plaintext
 
 Log Name:      Security
@@ -160,13 +162,14 @@ Description:   An account failed to log on.
 Account Name:  MaliciousActor
 Logon Type:    2 (Interactive)
 Status:        0xC000006A (Incorrect Password Entered)
-
+```
 
 II. Automated Security Policy Account Lockouts (Event ID 4740)
 Fires automatically when password failure thresholds are breached, locking out the user and recording the exact workstation that generated the lockout sequence:
 
-Plaintext
 ```text
+Plaintext
+
 Log Name:      Security
 Event ID:      4740
 Keywords:      Audit Success
